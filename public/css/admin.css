@@ -1,5 +1,6 @@
 
 
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -10,7 +11,7 @@ body {
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+
 .sidebar {
     width: 240px;
     background: #0f172a;
@@ -51,6 +52,7 @@ body {
 /* LINKS */
 .sidebar a {
     display: flex;
+    
     align-items: center;
     gap: 12px;
     padding: 12px 20px;
@@ -77,6 +79,7 @@ body {
 /* DROPDOWN */
 .dropdown-menu-custom {
     background: #020617;
+    
 }
 
 .dropdown-menu-custom a {
@@ -106,4 +109,193 @@ body {
     .sidebar.collapsed {
         width: 240px;
     }
+}
+#blade-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+    z-index: 99999;
+
+    /* hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#blade-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#blade-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* optional */
+.modal-box {
+    width: 100%;
+}
+
+
+/* Close button */
+.blade-close {
+    background: white;
+    border: 1px solid white;
+    padding: 0px 0px;
+    font-size: 21px;
+    cursor: pointer;
+
+    position: absolute;
+    top: -7px;
+    right: 5px;
+}
+
+.form-footer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-save {
+        margin-top: 50px;
+        background: #3f6ad8;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 6px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-save:hover {
+        background: #304ca8;
+    }
+
+    label {
+    display: block;              
+    margin-bottom: 6px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+}
+
+label.required::after {
+    content: " *";
+    color: red;
+}
+
+input[type="text"],textarea{
+ width:40%;
+    padding: 6px 12px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.2s ease;
+    background: #fff;
+}
+
+.form_title{
+    margin-bottom: 33px;
+    font-family: sans-serif;
+    font-weight: 700;
+    text-align: center;
+    color: red;
+    background-color: #304ca8;
+
+}
+
+.add_btn{
+    float: right;
+    font-weight: 500;
+    color: white;
+    background-color: brown;
+    font-family: sans-serif;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: -30px;
+}
+
+.view_btn{
+    color: rgb(16, 12, 12);
+}
+
+.side_text{
+    font-weight: 600;
+    font-family: sans-serif;
+    color: #000;
+    margin-top: -13px;
+    font-size: 34px;
+}
+
+/* HTML:*/
+.loader {
+  width: 50px;
+  --b: 8px; 
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%,#f03355) content-box;
+  -webkit-mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+          mask-composite: intersect;
+  animation:l4 1s infinite steps(10);
+}
+@keyframes l4 {to{transform: rotate(1turn)}}
+
+
+
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    color: #333;
+    padding: 25px 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 9999;
+    animation: popupFade 0.3s ease;
+}
+
+.success-icon {
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 10px;
+    background: #28a745;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+ nav svg {
+    height: 20px !important;
+    width: 20px !important;
 }

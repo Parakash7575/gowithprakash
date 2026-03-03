@@ -21,22 +21,34 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN ROUTES (ADD HERE 👇)
-|--------------------------------------------------------------------------
-*/
+
+
+
+
 Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->group(function () {
 
-        Route::get('/dashboard', [admin_con::class, 'index'])
-            ->name('admin.dashboard');
+        Route::get('/dashboard', [admin_con::class, 'index']) ->name('admin.dashboard');
+        });
+        Route::get('admin/category_list_view',[admin_con::class,'category_list'])->name('category_listing');
 
-        Route::get('/packages', [PackageController::class, 'index'])
-            ->name('admin.packages');
 
-});
+        Route::get('admin/add_category',[admin_con::class,'add_category_view'])->name('add_category');
+        Route::post('admin/save_category',[admin_con::class,'save_category'])->name('save_category');
+        Route::get('admin/view_category/{id}/{mode?}',[admin_con::class,'view_category'])->name('view_category');
+        Route::put('admin/view_category/{id}',[admin_con::class,'edit_category'])->name('edit_category');
+        Route::delete('admin/delete_category/{id}',[admin_con::class,'delete_category'])->name('delete_category');
+
+
+
+        
+
+
+        // Route::get('/packages', [PackageController::class, 'index'])
+        //     ->name('admin.packages');
+
+
 
 /* Optional */
 Route::view('boot','boot');

@@ -19,7 +19,7 @@ class admin_con extends Controller
     public function category_list(){
 
 
-        $data=tourcategory_model::paginate(10);
+        $data=tourcategory_model::where(['is_deleted'=>0])->paginate(10);
         
         return view('admin/category_list_view',['data'=>$data]);
     }
@@ -50,29 +50,30 @@ public function save_category(Request $request){
    return redirect()->route('category_listing')->with('success','Tour Category Added');
 
 }
-
- public function view_category($tour_id ){
-    $data['view_data']=tourcategory_model::find($tour_id);
-    $data['formname']='Add Tour Category';
-
-    // return view('admin.add_category',$data);
+public function view_category($tour_id,$mode='view' ){
+    $view_data=tourcategory_model::where('tour_id',$tour_id)->where('is_deleted',0)->first();
     
-if (request()->ajax()) {
+    return view('admin.view_cat', ['view_data' => $view_data,'mode'=>$mode]);
+}
 
-        $view = view('admin.add_category',$data);
-        $sections = $view->renderSections();
-
-        return $sections['content'] ?? '';
+public function edit_category(Request $request, $id)
+{
+     $request->validate(['category'=>'required']);
+    $tour_cat=tourcategory_model::find($id);
+    if(!$tour_cat){
+        return redirect()->back()->with('error','Category Not Found');
     }
+    $tour_cat->tour_category=$request->category;
+    $tour_cat->save();
+    return redirect()->route('category_listing')->with('success','Category Edit Sucessfully');    
 
-    return view('admin.add_category',$data);
-    
-        
-        
+}
 
-        
-    
+public function delete_category($id){
+    tourcategory_model::where('tour_id',$id)->update(['is_deleted'=>1]);
+    return redirect()->route('category_listing')->with('success','category Delete Sucess');
+   
+}
 }
 
 
-}
