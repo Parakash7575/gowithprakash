@@ -21,7 +21,7 @@
     <tbody>
         @foreach($data as $category_list)
         <tr>
-        <td>{{ $category_list->tour_id }}</td>
+        <td>{{$loop->iteration }}</td>
         <td>{{ $category_list->tour_category }}</td>
         <td>{{ $category_list->added_date }}</td>
       <td>
@@ -33,20 +33,20 @@
     </button>
 
     
-    <button class="x-blade-popup btn btn-sm btn-outline-primary"
+    <button class="x-blade-popup btn btn-sm btn-outline-secondary"
         data-href="{{ route('view_category', [$category_list->tour_id, 'edit']) }}"
         title="Edit">
         <i class="lni lni-pencil"></i>
     </button>
      
-    <form action="{{ route('delete_category', $category_list->tour_id) }}" method="POST">
+    <form action="{{ route('delete_category', $category_list->tour_id) }}" method="POST" style="display:inline;">
     @csrf
     @method('DELETE')
 
     <button type="submit"
-            onclick="return confirm('Are you sure?')"
-            class="btn btn-danger btn-sm">
-        <i class="lni lni-trash"></i>
+            onclick="return confirm('Are you sure to Delete?')"
+            class="btn  btn-sm btn-outline-secondary">
+     <i class="lni lni-trash-can"></i>
     </button>
 </form>
 </td>

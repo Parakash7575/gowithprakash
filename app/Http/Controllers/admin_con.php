@@ -71,7 +71,7 @@ public function edit_category(Request $request, $id)
 
 public function delete_category($id){
     tourcategory_model::where('tour_id',$id)->update(['is_deleted'=>1]);
-    return redirect()->route('category_listing')->with('success','category Delete Sucess');
+    return redirect()->route('category_listing')->with('success','category Delete Sucessfully');
    
 }
 }
